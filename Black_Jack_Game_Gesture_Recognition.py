@@ -27,38 +27,8 @@ Special Rules :
 import random
 import time
 import sys
-import pyttsx3
 import datetime
 import test
-
-# setting up engine for text to speech properties
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
-
-def speak(audio):
-    '''
-    takes string as an argument and provides a voice to it using engine we set up above
-    '''
-    engine.say(audio)
-    engine.runAndWait()
-
-def wishMe():
-    """
-    Function to greet the user at the start of the game
-    """
-    hour = int(datetime.datetime.now().hour)
-    if hour>= 0 and hour<12:
-        speak("Good Morning Sir !")
-  
-    elif hour>= 12 and hour<18:
-        speak("Good Afternoon Sir !")  
-  
-    else:
-        speak("Good Evening Sir !") 
-    # speak("Welcome to Black Jack Game")
-    speak("I am your Dealer Ben Affleck")
-
 
 suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 ranks = (
@@ -138,49 +108,45 @@ class Player:
                 self.sum += card.value
 
     def stand_hit(self):
-        # user_choice = input("Please! Enter 0 for a stand and 1 for a hit ")
-        print_str("Please! tell if you want to take a stand or a hit ")
+        print("Please! tell if you want to take a stand or a hit ")
         user_choice = test.capture()
         while(user_choice not in ["Hit","Stand"]):
-            print_str("Not a valid input, Try again. . .")
-            print_str("Please! tell if you want to take a stand or a hit ")
-            # user_choice = input("Please! Enter 0 for a stand and 1 for a hit")
+            print("Not a valid input, Try again. . .")
+            print("Please! tell if you want to take a stand or a hit ")
             user_choice = test.capture()
         return int(user_choice=="Hit")
     
     def display_player(self):
-        print_str(f"\n{self.name}'s cards are : ")
+        print(f"\n{self.name}'s cards are : ")
         for i in range(0,len(self.hands)-1):
             print(self.hands[i],end=" + ")
-            speak(self.hands[i])
+            # speak(self.hands[i])
         print(self.hands[len(self.hands)-1],"\n")
-        speak(self.hands[len(self.hands)-1])
+        # speak(self.hands[len(self.hands)-1])
 
 
     def display_dealer(self):
-        print_str(f"\n{self.name}'s cards are : ")
+        print(f"\n{self.name}'s cards are : ")
         print("Hidden",end = " + ")
-        speak("Hidden")
+        # speak("Hidden")
         for i in range(1,len(self.hands)-1):
             print(self.hands[i],end=" + ")
-            speak(self.hands[i])
+            # speak(self.hands[i])
         print(self.hands[len(self.hands)-1],"\n")
-        speak(self.hands[len(self.hands)-1])
+        # speak(self.hands[len(self.hands)-1])
 
-def print_str(string):
-    for i in string:
-        print(i,end="")
-        # time.sleep(0.05)
-    speak(string)
-    print("")
+# def print_str(string):
+#     for i in string:
+#         print(i,end="")
+#         # time.sleep(0.05)
+#     # speak(string)
+#     print("")
 
 
 # game logic
-print_str("Welcome to Black Jack Game!!")
-wishMe()
+print("Welcome to Black Jack Game!!")
 time.sleep(0.25)
 dealer = Player("Ben Affleck")
-# player = Player(input("Enter the name of the player:"))
 player = Player("Player")
 new_deck = Deck()
 new_deck.shuffle_deck()
@@ -193,35 +159,35 @@ player.display_player()
 dealer.display_dealer()
 time.sleep(0.5)
 
-print_str(f"\nIt's {player.name}'s turn\n")
+print(f"\nIt's {player.name}'s turn\n")
 time.sleep(0.25)
 while(player.sum<=21 ):
     if(player.stand_hit()):
-        print_str(f"\n{player.name} will be taking a hit\n")
+        print(f"\n{player.name} will be taking a hit\n")
         player.add_cards(new_deck.deal_one())
     else:
-        print_str(f"\n{player.name} will be taking a stand\n")
+        print(f"\n{player.name} will be taking a stand\n")
         break
     player.display_player()
     dealer.display_dealer()
     time.sleep(0.5)
 
 else:
-    print_str(f"\nOOPS! {player.name} got busted!!!!! \n")
+    print(f"\nOOPS! {player.name} got busted!!!!! \n")
     sys.exit()
 
-print_str("\nIt's now Dealer's turn\n")
+print("\nIt's now Dealer's turn\n")
 time.sleep(0.25)
 player.display_player()
 dealer.display_player()
 time.sleep(2)
 while(dealer.sum<=21):
     if(dealer.sum<=player.sum):
-        print_str("\nDealer will be taking a hit\n")
+        print("\nDealer will be taking a hit\n")
         time.sleep(0.25)
         dealer.add_cards(new_deck.deal_one())
     else:
-        print_str(f"\nDealer reached player, thus {player.name} looses!!!!\n")
+        print(f"\nDealer reached player, thus {player.name} looses!!!!\n")
         player.display_player()
         dealer.display_player()
         break
@@ -229,5 +195,5 @@ while(dealer.sum<=21):
     dealer.display_player()
     time.sleep(2)
 else:
-    print_str(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
+    print(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
     sys.exit()
