@@ -32,33 +32,33 @@ import test
 
 suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 ranks = (
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Jack",
-    "Queen",
-    "King",
-    "Ace",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "J",
+    "Q",
+    "K",
+    "A",
 )
-values = {"Two" : 2,
-    "Three" : 3,
-    "Four" : 4,
-    "Five" : 5,
-    "Six" : 6,
-    "Seven" : 7,
-    "Eight" : 8,
-    "Nine" : 9,
-    "Ten" : 10,
-    "Jack" : 10,
-    "Queen" : 10,
-    "King" : 10,
-    "Ace" : 11,
+values = {"2" : 2,
+    "3" : 3,
+    "4" : 4,
+    "5" : 5,
+    "6" : 6,
+    "7" : 7,
+    "8" : 8,
+    "9" : 9,
+    "10" : 10,
+    "J" : 10,
+    "Q" : 10,
+    "K" : 10,
+    "A" : 11,
     }
 
 class Card:
@@ -71,7 +71,7 @@ class Card:
         self.value = values[self.rank]
 
     def __str__(self):
-        return self.rank + " of " + self.suit
+        return self.rank + self.suit[0] + ".png"
     
 class Deck:
     """
@@ -120,27 +120,15 @@ class Player:
         print(f"\n{self.name}'s cards are : ")
         for i in range(0,len(self.hands)-1):
             print(self.hands[i],end=" + ")
-            # speak(self.hands[i])
         print(self.hands[len(self.hands)-1],"\n")
-        # speak(self.hands[len(self.hands)-1])
 
 
     def display_dealer(self):
         print(f"\n{self.name}'s cards are : ")
-        print("Hidden",end = " + ")
-        # speak("Hidden")
+        print("red_back.png",end = " + ")
         for i in range(1,len(self.hands)-1):
             print(self.hands[i],end=" + ")
-            # speak(self.hands[i])
         print(self.hands[len(self.hands)-1],"\n")
-        # speak(self.hands[len(self.hands)-1])
-
-# def print_str(string):
-#     for i in string:
-#         print(i,end="")
-#         # time.sleep(0.05)
-#     # speak(string)
-#     print("")
 
 
 # game logic
@@ -154,13 +142,13 @@ new_deck.shuffle_deck()
 for i in range(2):
     player.add_cards(new_deck.deal_one())
     dealer.add_cards(new_deck.deal_one())
-
+time.sleep(2)
 player.display_player()
 dealer.display_dealer()
-time.sleep(0.5)
+time.sleep(5)
 
 print(f"\nIt's {player.name}'s turn\n")
-time.sleep(0.25)
+time.sleep(2.5)
 while(player.sum<=21 ):
     if(player.stand_hit()):
         print(f"\n{player.name} will be taking a hit\n")
@@ -170,21 +158,21 @@ while(player.sum<=21 ):
         break
     player.display_player()
     dealer.display_dealer()
-    time.sleep(0.5)
+    time.sleep(2.5)
 
 else:
     print(f"\nOOPS! {player.name} got busted!!!!! \n")
     sys.exit()
 
 print("\nIt's now Dealer's turn\n")
-time.sleep(0.25)
+time.sleep(1)
 player.display_player()
 dealer.display_player()
-time.sleep(2)
+time.sleep(3)
 while(dealer.sum<=21):
     if(dealer.sum<=player.sum):
         print("\nDealer will be taking a hit\n")
-        time.sleep(0.25)
+        time.sleep(2)
         dealer.add_cards(new_deck.deal_one())
     else:
         print(f"\nDealer reached player, thus {player.name} looses!!!!\n")
@@ -193,7 +181,7 @@ while(dealer.sum<=21):
         break
     player.display_player()
     dealer.display_player()
-    time.sleep(2)
+    time.sleep(5)
 else:
     print(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
     sys.exit()
