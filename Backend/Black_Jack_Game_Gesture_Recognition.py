@@ -99,7 +99,7 @@ class Player:
 
     def add_cards(self,card):
         self.hands.append(card)
-        if (card.rank != "Ace"):
+        if (card.rank != "A"):
             self.sum += card.value
         else:
             if(self.sum + card.value >21):
@@ -140,7 +140,9 @@ new_deck = Deck()
 new_deck.shuffle_deck()
 
 for i in range(2):
+    # array in player.hands changes
     player.add_cards(new_deck.deal_one())
+    # array in dealer.hands changes
     dealer.add_cards(new_deck.deal_one())
 time.sleep(2)
 player.display_player()
@@ -152,6 +154,7 @@ time.sleep(2.5)
 while(player.sum<=21 ):
     if(player.stand_hit()):
         print(f"\n{player.name} will be taking a hit\n")
+        # array in player.hands changes
         player.add_cards(new_deck.deal_one())
     else:
         print(f"\n{player.name} will be taking a stand\n")
@@ -161,9 +164,11 @@ while(player.sum<=21 ):
     time.sleep(2.5)
 
 else:
+    # Player gets busted and dealer wins
     print(f"\nOOPS! {player.name} got busted!!!!! \n")
     sys.exit()
 
+# Turn changes from player to dealer
 print("\nIt's now Dealer's turn\n")
 time.sleep(1)
 player.display_player()
@@ -173,8 +178,10 @@ while(dealer.sum<=21):
     if(dealer.sum<=player.sum):
         print("\nDealer will be taking a hit\n")
         time.sleep(2)
+        # array in dealer.hands changes
         dealer.add_cards(new_deck.deal_one())
     else:
+        # Dealer reached player and thus dealer wins
         print(f"\nDealer reached player, thus {player.name} looses!!!!\n")
         player.display_player()
         dealer.display_player()
@@ -183,5 +190,6 @@ while(dealer.sum<=21):
     dealer.display_player()
     time.sleep(5)
 else:
+    # Dealers got busted and Player wins
     print(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
     sys.exit()
