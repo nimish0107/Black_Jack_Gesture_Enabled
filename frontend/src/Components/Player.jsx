@@ -1,13 +1,24 @@
 import React from "react";
 import Card from "./Card";
+import { useEffect } from "react";
 import axios from "axios";
 
 const Player = () => {
-  const playerArray = [];
+    const [playerArray, setPlayerCards] = React.useState([]);
 
-  axios.get("http://localhost:5000/").then((res) => {
-    playerArray.push(res.data);
-  });
+    useEffect(() => {
+      // Fetch card data from the server when the component mounts
+      axios.get("http://127.0.0.1:5000/deck")
+        .then((res) => {
+          const { player_cards } = res.data;
+          setPlayerCards(...Card,  player_cards);
+          console.log(playerArray) // Update state with player cards
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []); //
+
 
   return (
     <div className="flex flex-row gap-5 items-center justify-center">

@@ -13,8 +13,13 @@
 #     app.run(debug=True, port=5000)
 from flask import Flask, jsonify
 import random
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+
+CORS(app, origins='http://localhost:3000')
+
 
 # Define global variables
 suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -71,7 +76,7 @@ class Player:
 
 
 # Flask routes
-@app.route("/", methods=['GET'])
+@app.route("/deck", methods=['GET'])
 def func():
     dealer_lst = []
     player_lst = []
