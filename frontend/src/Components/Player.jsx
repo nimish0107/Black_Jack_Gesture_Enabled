@@ -1,8 +1,13 @@
 import React from "react";
 import Card from "./Card";
+import axios from "axios";
 
 const Player = () => {
-  const playerArray = ["2C", "3D", "4D", "5D", "6D", "7D", "8D", "9D"];
+  const playerArray = [];
+
+  axios.get("http://localhost:5000/").then((res) => {
+    playerArray.push(res.data);
+  });
 
   return (
     <div className="flex flex-row gap-5 items-center justify-center">
