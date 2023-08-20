@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import Player from "./Components/Player";
+import Decker from "./Components/Decker";
 import "./App.css";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <div className="flex flex-col pl-10 my-[2px] text-[36px] gap-10">
         <div>Dealer's Card:</div>
         <div>
-          <Player />
+          <Decker />
         </div>
       </div>
     </div>

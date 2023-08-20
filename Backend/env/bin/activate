@@ -45,7 +45,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/Users/ronitparakh/Black_Jack_Gesture_Enabled/Backend/env'
+VIRTUAL_ENV='/Users/manan/Desktop/Projects/gdsc/Black_Jack_Gesture_Enabled/Backend/env'
 if ([ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]) && $(command -v cygpath &> /dev/null) ; then
     VIRTUAL_ENV=$(cygpath -u "$VIRTUAL_ENV")
 fi

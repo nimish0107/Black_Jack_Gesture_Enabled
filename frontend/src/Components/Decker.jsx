@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import axios from "axios";
 
-const Player = () => {
+const Decker = () => {
   const [playerArray, setPlayerCards] = useState([]); // Initialize with an empty array
 
   useEffect(() => {
     axios
       .get("http://127.0.0.1:5000/deck")
       .then((res) => {
-        const { player_cards } = res.data;
-        setPlayerCards((prevCards) => [...prevCards, ...player_cards]); // Update the state with received cards
-        console.log(player_cards);
+        const { dealer_cards } = res.data;
+        setPlayerCards((prevCards) => [...prevCards, ...dealer_cards]); // Update the state with received cards
+        console.log(dealer_cards);
       })
       .catch((err) => {
         console.log(err);
@@ -27,4 +27,4 @@ const Player = () => {
   );
 };
 
-export default Player;
+export default Decker;
