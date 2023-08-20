@@ -87,10 +87,10 @@ def func():
     dealer.add_cards(new_deck.deal_one())
 
     # Display player's card information and return it in JSON format
-    # player_card_info = [str(card) for card in player.display_player()]
-    # dealer_card_info = [str(card) for card in dealer.display_player()]
+    player_card_info = [str(card) for card in player.display_player()]
+    dealer_card_info = [str(card) for card in dealer.display_player()]
     
-    return jsonify(player_cards=player.display_player())
+    return jsonify(player_cards=player_card_info, dealer_cards = dealer_card_info)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
