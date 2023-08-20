@@ -182,7 +182,9 @@ while(dealer.sum<=21):
         dealer.add_cards(new_deck.deal_one())
     else:
         # Dealer reached player and thus dealer wins
-        print(f"\nDealer reached player, thus {player.name} looses!!!!\n")
+        # print(f"\nDealer reached player, thus {player.name} looses!!!!\n")
+        win = 0
+
         player.display_player()
         dealer.display_player()
         break
@@ -191,5 +193,6 @@ while(dealer.sum<=21):
     time.sleep(5)
 else:
     # Dealers got busted and Player wins
-    print(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
+    # print(f"\nOOPS! Dealer got busted!!!!! and {player.name} won the game \n")
+    win = 1
     sys.exit()
